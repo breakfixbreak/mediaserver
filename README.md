@@ -22,4 +22,4 @@ Things to edit:
 - `PLEX_CLAIM`
 - Volumes
 
-Add values for the volume as per your set up. Make the media directory the same as the host save lcoation from the torrent_stack
+Add values for the volume as per your set up. Make the media directory the same as the host save lcoation from the torrent_stack. Media will then save in a location Plex can see, re-scan to update or set up scheduled scans. Maybe pick up a lifetime Plex Pass around Black Friday when it's discounted.
