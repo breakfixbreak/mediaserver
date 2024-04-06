@@ -1,0 +1,29 @@
+version: "3"
+services:
+  vpn:
+    image: ghcr.io/bubuntux/nordvpn
+    container_name: nordvpn
+    cap_add:
+      - NET_ADMIN               # Required
+      - NET_RAW                 # Required
+    environment:                # https://github.com/bubuntux/nordvpn#environment-variables
+      - TOKEN=<ADD TOKEN HERE>  # Required e.g. for us5059.nordvpn.com use us5059
+      - CONNECT=<ADD SERVER HERE>
+      - TECHNOLOGY=NordLynx
+      - NETWORK=192.168.1.0/24  # Access on local network
+    ports:
+      - 8080:8080
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=1  # For ipv4 only
+  torrent:
+    image: ghcr.io/linuxserver/qbittorrent
+    container_name: qbittorrent
+    network_mode: service:vpn
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /path/to/host/media/folder:/downloads
+    depends_on:
+      - vpn
+    restart: always
